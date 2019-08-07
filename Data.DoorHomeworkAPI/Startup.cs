@@ -17,7 +17,6 @@ namespace Data.DoorHomeworkAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IDoorRepository, DoorRepository>();
-            services.AddTransient<IModelStorage, DoorData>();
         }
     }
 }

@@ -7,11 +7,11 @@ namespace Data.DoorHomeworkAPI.Models
 {
     public class DoorRepository : IDoorRepository
     {
-        private IModelStorage storage;
+        private Dictionary<long, Door> doors;
 
-        public DoorRepository(IModelStorage modelStore)
+        public DoorRepository()
         {
-            storage = modelStore;
+            doors = new Dictionary<long, Door>();
             new List<Door>
             {
                 new Door {BuildingId = 1, Name = "Front door", DoorId = 1, Status = DoorStatus.ClosedUnlocked },
@@ -22,12 +22,12 @@ namespace Data.DoorHomeworkAPI.Models
 
         public void AddDoor(Door door)
         {
-            storage[door.DoorId] = door;
+            doors[door.DoorId] = door;
         }
 
         public bool OpenDoor(long doorId)
         {
-            Door door = storage[doorId];
+            Door door = doors[doorId];
             if (door.Status == DoorStatus.ClosedLocked || door.Status == DoorStatus.OpenLocked)
             {
                 door.Status = DoorStatus.OpenLocked;
@@ -42,7 +42,7 @@ namespace Data.DoorHomeworkAPI.Models
 
         public bool CloseDoor(long doorId)
         {
-            Door door = storage[doorId];
+            Door door = doors[doorId];
             if (door.Status == DoorStatus.ClosedLocked || door.Status == DoorStatus.OpenLocked)
             {
                 door.Status = DoorStatus.ClosedLocked;
@@ -57,7 +57,7 @@ namespace Data.DoorHomeworkAPI.Models
 
         public bool LockDoor(long doorId)
         {
-            Door door = storage[doorId];
+            Door door = doors[doorId];
             if (door.Status == DoorStatus.ClosedLocked || door.Status == DoorStatus.ClosedUnlocked)
             {
                 door.Status = DoorStatus.ClosedLocked;
@@ -72,7 +72,7 @@ namespace Data.DoorHomeworkAPI.Models
 
         public bool UnlockDoor(long doorId)
         {
-            Door door = storage[doorId];
+            Door door = doors[doorId];
             if (door.Status == DoorStatus.ClosedLocked || door.Status == DoorStatus.ClosedUnlocked)
             {
                 door.Status = DoorStatus.ClosedUnlocked;
@@ -87,12 +87,12 @@ namespace Data.DoorHomeworkAPI.Models
 
         public IEnumerable<Door> GetDoors()
         {
-            return storage.Items;
+            return doors.Values;
         }
 
         public DoorStatus GetDoorStatus(long doorId)
         {
-            Door door = storage[doorId];
+            Door door = doors[doorId];
             return door.Status;
         }        
     }

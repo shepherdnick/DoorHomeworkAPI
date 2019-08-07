@@ -18,5 +18,11 @@ namespace Data.DoorHomeworkAPI.Controllers
 
         [HttpGet("Index")]
         public string Index() => "This is from the door controller";
+
+        [HttpGet("GetDoors")]
+        public IEnumerable<Door> GetDoors()
+        {
+            return doorRepository.GetDoors();
+        }
     }
 }
