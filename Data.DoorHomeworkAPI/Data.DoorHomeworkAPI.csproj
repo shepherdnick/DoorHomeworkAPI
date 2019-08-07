@@ -7,6 +7,11 @@
     <StartupObject />
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>D:\VSTS\ImmixCloudV2\ImmixCloudV2\Services\SVDataServiceEx\bin\Debug\netcoreapp2.1\</OutputPath>
+    <DocumentationFile>D:\VSTS\ImmixCloudV2\ImmixCloudV2\Services\SVDataServiceEx\bin\Debug\netcoreapp2.1\Data.DoorHomeworkAPI.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
