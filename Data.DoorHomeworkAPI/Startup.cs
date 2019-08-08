@@ -20,6 +20,7 @@ namespace SVDataServiceEx
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IDoorRepository, DoorRepository>();
+            services.AddSingleton<IBuildingRepository, BuildingRepository>();
         }
     }
 }

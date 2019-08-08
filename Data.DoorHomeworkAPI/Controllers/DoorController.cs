@@ -8,32 +8,40 @@ using Microsoft.AspNetCore.Mvc;
 namespace Data.DoorHomeworkAPI.Controllers
 {
     /// <summary>
-    /// Controller for providing access to the doors API
+    /// Controller for providing access to the doors API.
     /// </summary>
+    [Produces("application/json")]
+    [Route("Door")]
     public class DoorController : Controller
     {
         private readonly IDoorRepository doorRepository;
+        private readonly IBuildingRepository buildingRepository;
 
         /// <summary>
-        /// Constructor for the door repository
+        /// Constructor for the door repository.
         /// </summary>
-        /// <param name="doorRepo">The IDoorRepository dependency</param>
-        public DoorController(IDoorRepository doorRepo)
+        /// <param name="doorRepo">The IDoorRepository dependency.</param>
+        /// <param name="buildingRepo">The IBuildingRepository dependency.</param>
+        public DoorController(IDoorRepository doorRepo, IBuildingRepository buildingRepo)
         {
             doorRepository = doorRepo;
+            buildingRepository = buildingRepo;
+        }
+        
+        /// <summary>
+        /// Gets the buildings for the system.
+        /// </summary>
+        /// <returns>A list of buildings for the system.</returns>
+        [HttpGet("GetBuildings")]
+        public IEnumerable<Building> GetBuildings()
+        {
+            return buildingRepository.GetBuildings();
         }
 
         /// <summary>
-        /// The basic index function to prove the shard is working
+        /// Gets the doors for the system.
         /// </summary>
-        /// <returns>A confirmation string</returns>
-        [HttpGet("Index")]
-        public string Index() => "This is from the door controller";
-
-        /// <summary>
-        /// Gets the doors for the system
-        /// </summary>
-        /// <returns>The doors for the system</returns>
+        /// <returns>The doors for the system.</returns>
         [HttpGet("GetDoors")]
         public IEnumerable<Object> GetDoors()
         {
@@ -41,25 +49,29 @@ namespace Data.DoorHomeworkAPI.Controllers
         }
 
         /// <summary>
-        /// Opens a door with the provided door id
+        /// Opens a door with the provided door id.
         /// </summary>
-        /// <param name="doorId">The door id</param>
-        /// <returns>Success or failure of the door open function</returns>
+        /// <param name="doorId">The door id to open.</param>
+        /// <returns>Success or failure of the door open function.</returns>
         [HttpPost("OpenDoor")]
         public bool OpenDoor(long doorId)
         {
+            if (doorId == 140)
+            {
+                throw new Exception("Unable to find door with doorId " + doorId);
+            }
             return doorRepository.OpenDoor(doorId);
         }
 
         /// <summary>
-        /// Closes a door with the provided door id
+        /// Closes a door with the provided door id.
         /// </summary>
-        /// <param name="doorId">The door id</param>
-        /// <returns>Success or failure of the door close function</returns>
+        /// <param name="doorId">The door id to close.</param>
+        /// <returns>Success or failure of the door close function.</returns>
         [HttpPost("CloseDoor")]
         public bool CloseDoor(long doorId)
         {
-            if (doorId == 1)
+            if (doorId == 24)
             {
                 throw new Exception("Unable to find door with doorId " + doorId);
             }
@@ -67,36 +79,48 @@ namespace Data.DoorHomeworkAPI.Controllers
         }
 
         /// <summary>
-        /// Locks a door with the provided door id
+        /// Locks a door with the provided door id.
         /// </summary>
-        /// <param name="doorId">The door id</param>
-        /// <returns>Success or failure of the door lock function</returns>
+        /// <param name="doorId">The door id to lock.</param>
+        /// <returns>Success or failure of the door lock function.</returns>
         [HttpPost("LockDoor")]
         public bool LockDoor(long doorId)
         {
+            if (doorId == 390)
+            {
+                throw new Exception("Unable to find door with doorId " + doorId);
+            }
             return doorRepository.LockDoor(doorId);
         }
 
         /// <summary>
-        /// Unlocks a door with the provided door id
+        /// Unlocks a door with the provided door id.
         /// </summary>
-        /// <param name="doorId">The door id</param>
-        /// <returns>Success or failure of the door unlocks function</returns>
+        /// <param name="doorId">The door id to unlock.</param>
+        /// <returns>Success or failure of the door unlocks function.</returns>
         [HttpPost("UnlockDoor")]
         public bool UnlockDoor(long doorId)
         {
+            if (doorId == 190)
+            {
+                throw new Exception("Unable to find door with doorId " + doorId);
+            }
             return doorRepository.UnlockDoor(doorId);
         }
 
         /// <summary>
-        /// Get the door status for the door id provided
+        /// Get the door status for the door id provided.
         /// </summary>
-        /// <param name="doorId">The door id</param>
-        /// <returns>The updated door status</returns>
+        /// <param name="doorId">The door id to get the status of.</param>
+        /// <returns>The updated door status.</returns>
         [HttpGet("GetStatus")]
-        public DoorStatus GetDoorStatus(long doorId)
+        public string GetDoorStatus(long doorId)
         {
-            return doorRepository.GetDoorStatus(doorId);
+            if (doorId == 99)
+            {
+                throw new Exception("Unable to find door with doorId " + doorId);
+            }
+            return doorRepository.GetDoorStatus(doorId).ToString();
         }
     }
 }

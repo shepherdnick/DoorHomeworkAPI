@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Data.DoorHomeworkAPI.Models
 {
+    /// <summary>
+    /// Representation of a door status
+    /// </summary>
     public enum DoorStatus
     {
         OpenLocked = 1,
