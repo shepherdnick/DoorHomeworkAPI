@@ -40,7 +40,12 @@ namespace Data.DoorHomeworkAPI.Models
                 new Building { BuildingId=909, Name="Fulton House"},
                 new Building { BuildingId=910, Name="Faraday Tower"},
                 new Building { BuildingId=911, Name="Singleton Library"}
-            }.ForEach(b => buildings[b.BuildingId] = b);
+            }.ForEach(b => AddBuilding(b));
+        }
+
+        public void AddBuilding(Building building)
+        {
+            buildings[building.BuildingId] = building;
         }
 
         /// <summary>
@@ -50,6 +55,11 @@ namespace Data.DoorHomeworkAPI.Models
         public IEnumerable<Building> GetBuildings()
         {
             return buildings.Values;
+        }
+
+        public void RemoveBuilding(long buildingId)
+        {
+            buildings.Remove(buildingId);
         }
     }
 }

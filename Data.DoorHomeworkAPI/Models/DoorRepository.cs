@@ -75,6 +75,11 @@ namespace Data.DoorHomeworkAPI.Models
             doors[door.DoorId] = door;
         }
 
+        public void RemoveDoor(long doorId)
+        {
+            doors.Remove(doorId);
+        }
+
         /// <summary>
         /// Opens the door with the provided door id
         /// </summary>
@@ -109,7 +114,7 @@ namespace Data.DoorHomeworkAPI.Models
             }
             else
             {
-                door.Status = DoorStatus.OpenLocked;
+                door.Status = DoorStatus.ClosedUnlocked;
             }
 
             return true;
