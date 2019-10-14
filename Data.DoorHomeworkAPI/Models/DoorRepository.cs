@@ -4,6 +4,8 @@ namespace Data.DoorHomeworkAPI.Models
 {
     /// <summary>
     /// Class for handling the door repository
+    /// 
+    /// NOTE: When setting up on a server, remove all Data.*.dll (and other files) to remove them from the swagger page.
     /// </summary>
     public class DoorRepository : IDoorRepository
     {
