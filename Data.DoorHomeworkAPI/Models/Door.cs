@@ -29,7 +29,5 @@ namespace Data.DoorHomeworkAPI.Models
         /// The status of the door
         /// </summary>
         public DoorStatus Status { get; set; }
-
-        private int TempChange { get; set; }
     }    
 }
